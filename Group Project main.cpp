@@ -30,7 +30,7 @@ void controllersOPT(float prices[10][2], int itemssold[10][2], int stock[10][2],
 
 int main()
 {
-	const int columns = 2, rows = 10;
+	const int columns = 2, rows = 10, productcol = 3;
 	ifstream inputFile;
 	float prices[rows][columns];
 	int stock[rows][columns];
