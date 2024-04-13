@@ -93,7 +93,7 @@ void employeemenu(float prices[10][2], int itemssold[10][2], int totalsales, int
 	int input;
 	bool end = true;
 	while (end) {
-		cout << "Welcome to the Employee Menu" << endl;
+		cout << "Welcome to the Function Fanatics Employee Menu" << endl;
 		cout << "1.Total sales and profit" << endl;
 		cout << "2.Current Stock" << endl;
 		cout << "3.Export to File" << endl;
@@ -264,7 +264,7 @@ int publicmenu(float prices[10][2], int itemssold[10][2], int stock[10][2], stri
 	int choice, sales = 0;
 	bool end = true;
 	while (end) {
-		cout << "Hi there welcome to the TBD Electronics store" << endl;
+		cout << "Hi there welcome to the Function Fanatics Electronics store" << endl;
 		cout << "Please View our selection of items below and then Enter what you wish to purchase" << endl;
 		for (int i = 0; i < 10; i++)
 		{
