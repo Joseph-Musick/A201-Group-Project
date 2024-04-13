@@ -1,0 +1,30 @@
+Speaker
+	Wired
+	Wireless
+Mouse
+	Wired
+	Wireless
+Monitor
+	Flat
+	Curved
+Laptop
+	Mac
+	Windows
+Desktop
+	Mac
+	Windows
+Memory
+	SSD
+	Hardrive
+Keyboard
+	Wired
+	Wireless
+Headphones
+	Wired
+	Wireless
+Microphone
+	Blue Yeti
+	Blue Snowball Ice
+Controllers
+	Joystick
+	Twin Stick
