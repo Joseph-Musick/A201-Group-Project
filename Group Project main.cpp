@@ -13,16 +13,16 @@ void sales_profit(float prices[10][2], int itemssold[10][2], string products[10]
 void remaining_stock(int stock[10][2], string products[10][3], int catagories, int subset);
 void receipt(float prices[10][2], int itemssold[10][2], int totalsales, int stock[10][2], string products[10][3], int columns, int rows, int productcol, int catagories, int subset);
 int publicmenu(float prices[10][2], int itemssold[10][2], int stock[10][2], string products[10][3], int subset, int columns, int rows);
-void speakerOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
-void mouseOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
-void monitorOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
-void laptopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
-void desktopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
-void memoryOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
-void keyboardOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
-void headphonesOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
-void microphoneOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
-void controllersOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset);
+void speakerOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
+void mouseOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
+void monitorOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
+void laptopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
+void desktopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
+void memoryOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
+void keyboardOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
+void headphonesOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
+void microphoneOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
+void controllersOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total);
 
 int main()
 {
@@ -157,7 +157,7 @@ void sales_profit(float prices[10][2], int itemssold[10][2], string products[10]
 		{
 			price = prices[i][j];
 			total += price * itemssold[i][j];
-			cout << setw(catagories) << products[i][0] << " " << setw(subset) << products[i][j + 1] << ":\t $" << setprecision(2) << fixed << price * itemssold[i][j] << endl;
+			cout << setw(catagories) << products[i][0] << " " << setw(subset) << products[i][j + 1] << "\t$" << setprecision(2) << fixed << price * itemssold[i][j] << endl;
 		}
 		cout << endl;
 	}
@@ -190,12 +190,7 @@ void receipt(float prices[10][2], int itemssold[10][2], int totalsales, int stoc
 	string receipt = "Receipt ",
 		curtime = ctime(&rawtime);
 	curtime.pop_back();
-	ofstream outputFile((receipt + "_" + curtime + ".txt").c_str());
-	//outputFile.open((receipt + ".txt").c_str());
-	if (outputFile.is_open())
-	{
-		cout << "GOod";
-	}
+	ofstream outputFile((receipt + ".txt").c_str());
 	outputFile << endl << "\t\t\tRecepit" << endl
 		<< endl
 		<< endl
@@ -284,43 +279,43 @@ int publicmenu(float prices[10][2], int itemssold[10][2], int stock[10][2], stri
 		choice--;
 		switch (choice) {
 		case 0:
-			speakerOPT(prices, itemssold, stock, choice, products, subset);
+			speakerOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case 1:
-			mouseOPT(prices, itemssold, stock, choice, products, subset);
+			mouseOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case 2:
-			monitorOPT(prices, itemssold, stock, choice, products, subset);
+			monitorOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case 3:
-			laptopOPT(prices, itemssold, stock, choice, products, subset);
+			laptopOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case 4:
-			desktopOPT(prices, itemssold, stock, choice, products, subset);
+			desktopOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case 5:
-			memoryOPT(prices, itemssold, stock, choice, products, subset);
+			memoryOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case 6:
-			keyboardOPT(prices, itemssold, stock, choice, products, subset);
+			keyboardOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case 7:
-			headphonesOPT(prices, itemssold, stock, choice, products, subset);
+			headphonesOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case 8:
-			microphoneOPT(prices, itemssold, stock, choice, products, subset);
+			microphoneOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case 9:
-			controllersOPT(prices, itemssold, stock, choice, products, subset);
+			controllersOPT(prices, itemssold, stock, choice, products, subset, &total);
 			sales++;
 			break;
 		case -1:
@@ -331,11 +326,13 @@ int publicmenu(float prices[10][2], int itemssold[10][2], int stock[10][2], stri
 			break;
 		}
 	}
-
+	cout << "You have purchased " << sales << " of items for a total of $" << setprecision(2) << fixed << total << endl << endl;
 	return sales;
 }
-void speakerOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset) {
+void speakerOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
+{
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//Logitech z150
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -348,21 +345,26 @@ void speakerOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
+	input--;
 	switch (input) {
-	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+	case 0:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
-	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+	case 1:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
 	}
 }
-void mouseOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset) {
+void mouseOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
+{
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//G502 Wired
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -375,23 +377,27 @@ void mouseOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int c
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
-	cout << endl;
+	input--;
 	switch (input) {
-	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+	case 0:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
-	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+	case 1:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
 	}
 
 }
-void monitorOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset) {
+void monitorOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
+{
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//Samsung under 27 inch 1080p 
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -404,21 +410,26 @@ void monitorOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
+	input--;
 	switch (input) {
-	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+	case 0:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
-	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+	case 1:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
 	}
 }
-void laptopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset) {
+void laptopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
+{
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//16inch macbook pro
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -431,21 +442,26 @@ void laptopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int 
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
+	input--;
 	switch (input) {
-	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+	case 0:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
-	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+	case 1:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
 	}
 }
-void desktopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset) {
+void desktopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
+{
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//iMac desktop
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -458,21 +474,26 @@ void desktopOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
+	input--;
 	switch (input) {
-	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+	case 0:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
-	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+	case 1:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
 	}
 }
-void memoryOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset) {
+void memoryOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
+{
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//1tb 
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -485,21 +506,26 @@ void memoryOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int 
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
+	input--;
 	switch (input) {
-	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+	case 0:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
-	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+	case 1:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
 	}
 }
-void keyboardOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset) {
+void keyboardOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
+{
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//full size black widow v3
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -512,21 +538,26 @@ void keyboardOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], in
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
+	input--;
 	switch (input) {
 	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
 	}
 }
-void headphonesOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset) {
+void headphonesOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
+{
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//Hyperx Cloud 2 wired
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -539,21 +570,26 @@ void headphonesOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], 
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
+	input--;
 	switch (input) {
-	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+	case 0:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
-	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+	case 1:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
 	}
 }
-void microphoneOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset) {
+void microphoneOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
+{
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -566,22 +602,26 @@ void microphoneOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], 
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
+	input--;
 	switch (input) {
-	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+	case 0:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
-	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+	case 1:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
 	}
 }
-void controllersOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset)
+void controllersOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
 {
 	int input;
+	cout << endl;
 	cout << "1." << left << setw(subset) << products[choice][1] << " $" << setprecision(2) << fixed << prices[choice][0];
 	cout << " Stock: " << stock[choice][0] << endl;//logitech 3d pro
 	cout << "2." << left << setw(subset) << products[choice][2] << " $" << setprecision(2) << fixed << prices[choice][1];
@@ -594,14 +634,17 @@ void controllersOPT(float prices[10][2], int itemssold[10][2], int stock[10][2],
 		cout << "Your choice must be between 1 or 2" << endl;
 		cin >> input;
 	}
+	input--;
 	switch (input) {
-	case 1:
-		itemssold[choice][0]++;
-		stock[choice][0]--;
+	case 0:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
-	case 2:
-		itemssold[choice][1]++;
-		stock[choice][1]--;
+	case 1:
+		itemssold[choice][input]++;
+		stock[choice][input]--;
+		*total += prices[choice][input];
 		break;
 	default:
 		break;
