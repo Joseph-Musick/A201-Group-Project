@@ -181,7 +181,7 @@ void remaining_stock(int stock[10][2], string products[10][3], int catagories, i
 	{
 		for (int j = 0; j < 2; j++)
 		{
-			cout << left << setw(catagories) << products[i][0] << " " << setw(subset) << products[i][j + 1] << ":\t ";
+			cout << left << setw(catagories) << products[i][0] << " " << setw(subset) << products[i][j + 1] << "\t ";
 			cout << stock[i][j] << endl;
 		}
 		cout << endl;
@@ -335,7 +335,7 @@ int publicmenu(float prices[10][2], int itemssold[10][2], int stock[10][2], stri
 			break;
 		}
 	}
-	cout << "You have purchased " << sales << " of items for a total of $" << setprecision(2) << fixed << total << endl << endl;
+	cout << endl << "You have purchased " << sales << " of items for a total of $" << setprecision(2) << fixed << total << endl << endl;
 	return sales;
 }
 void speakerOPT(float prices[10][2], int itemssold[10][2], int stock[10][2], int choice, string products[10][3], int subset, float* total)
