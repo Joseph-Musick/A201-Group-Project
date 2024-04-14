@@ -273,7 +273,7 @@ int publicmenu(float prices[10][2], int itemssold[10][2], int stock[10][2], stri
 		cout << endl;
 		cout << "Hi there welcome to the Function Fanatics Electronics store" << endl;
 		cout << "Please View our selection of items below and then Enter what you wish to purchase" << endl;
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < rows; i++)
 		{
 			cout << i + 1 << "." << products[i][0] << endl;
 		}
