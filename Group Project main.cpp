@@ -118,8 +118,8 @@ void employeemenu(float prices[10][2], int itemssold[10][2], int totalsales, int
 	int input;
 	bool end = true;
 	cout << endl;
-	cout << endl;
 	while (end) {
+		cout << endl;
 		cout << "Welcome to the Function Fanatics Employee Menu" << endl;
 		cout << "1.Total sales and profit" << endl;
 		cout << "2.Current Stock" << endl;
